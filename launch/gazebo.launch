@@ -11,11 +11,9 @@
     <!-- spawn cylinder -->
     <node name="cyl_sp" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model cylinder -file $(find ecn_turtle)/urdf/cylinder.urdf -x 5 -y 0"/>
 
-    <!-- spawn robot >
-    <param name="robot_description" command="$(find xacro)/xacro.py $(find ecn_turtle)/urdf/turtle_hokuyo.urdf"/-->
-    <!--node name="spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model turtlebot -param robot_description -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"/-->    
-    
-    <node name="spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model turtlebot -file $(find ecn_turtle)/urdf/turtle_hokuyo.urdf -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"/>    
+    <!-- spawn robot-->
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find ecn_turtle)/urdf/turtle_hokuyo.urdf"/> 
+    <node name="spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model turtlebot -param robot_description -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"/>    
     
     
     

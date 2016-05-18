@@ -3,22 +3,6 @@
   <material name="Green">
     <color rgba="0.0 0.8 0.0 1.0"/>
   </material>
-  <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin, navigation stack depends on this frame -->
-  <link name="base_footprint">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Green"/>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0.017"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
   <link name="base_link">
     <inertial>
       <mass value="2"/>
@@ -73,11 +57,6 @@
       <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
   </link>
-  <joint name="base_footprint_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.017"/>
-    <parent link="base_footprint"/>
-    <child link="base_link"/>
-  </joint>
   <joint name="base_wall_sensor_joint" type="fixed">
     <origin rpy="0 0 -1.0" xyz="0.09 -0.120 0.042"/>
     <parent link="base_link"/>
@@ -236,21 +215,7 @@
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
-  <gazebo>
-    <plugin filename="libgazebo_ros_create.so" name="create_controller">
-      <alwaysOn>true</alwaysOn>
-      <node_namespace>turtlebot_node</node_namespace>
-      <left_wheel_joint>left_wheel_joint</left_wheel_joint>
-      <right_wheel_joint>right_wheel_joint</right_wheel_joint>
-      <front_castor_joint>front_castor_joint</front_castor_joint>
-      <rear_castor_joint>rear_castor_joint</rear_castor_joint>
-      <wheel_separation>.260</wheel_separation>
-      <wheel_diameter>0.066</wheel_diameter>
-      <base_geom>base_footprint_collision_base_link</base_geom>
-      <updateRate>40</updateRate>
-      <torque>1.0</torque>
-    </plugin>
-  </gazebo>
+
   <gazebo reference="left_wheel_link">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
@@ -938,16 +903,18 @@
       </geometry>
     </collision>
   </link>
+
+
   <!-- diff drive -->
   <gazebo>
     <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
-      <publishWheelTF>false</publishWheelTF>
+      <publishWheelTF>true</publishWheelTF>
       <publishWheelJointState>true</publishWheelJointState>
       <alwaysOn>true</alwaysOn>
-      <leftJoint>left_wheel_joint</leftJoint>
-      <rightJoint>right_wheel_joint</rightJoint>
+      <leftJoint>right_wheel_joint</leftJoint>
+      <rightJoint>left_wheel_joint</rightJoint>
       <wheelSeparation>0.26</wheelSeparation>
-      <wheelDiameter>0.03</wheelDiameter>
+      <wheelDiameter>0.066</wheelDiameter>
       <wheelTorque>20</wheelTorque>
       <wheelAcceleration>1.8</wheelAcceleration>
       <commandTopic>cmd_vel</commandTopic>
@@ -955,10 +922,13 @@
       <odometryFrame>odom</odometryFrame>
       <odometrySource>world</odometrySource>
       <robotBaseFrame>base_link</robotBaseFrame>
-      <updateRate>10.0</updateRate>
-      <legacyMode>false</legacyMode>
+      <updateRate>50.0</updateRate>
+      <legacyMode>true</legacyMode>
     </plugin>
   </gazebo>
+
+
+
   <!-- Hokuyo 2D LIDAR-->
   <joint name="laser" type="fixed">
     <origin rpy="3.14159 0.0 0.0" xyz="0.15 0.0 0.360"/>
@@ -980,10 +950,12 @@
   <gazebo reference="base_laser_link">
     <material value="Gazebo/White"/>
   </gazebo>
-  <!--gazebo reference="base_laser_link">
+
+
+  <gazebo reference="base_laser_link">
       <sensor type="ray" name="laser">
         <pose>0 0 0 0 0 0</pose>
-        <visualize>false</visualize>
+        <visualize>true</visualize>
         <update_rate>40</update_rate>
         <ray>
           <scan>
@@ -1010,6 +982,8 @@
           <frameName>base_laser_link</frameName>
         </plugin>
       </sensor>
-  </gazebo-->
+  </gazebo>
 </robot>
+
+
 
