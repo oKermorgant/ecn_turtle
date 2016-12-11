@@ -952,11 +952,10 @@
   </gazebo>
 
 
-  <!--gazebo reference="base_laser_link">
+  <gazebo reference="base_laser_link">
       <sensor type="ray" name="laser">
         <pose>0 0 0 0 0 0</pose>
-        <visualize>false</visualize>
-        <update_rate>40</update_rate>
+        <update_rate>10</update_rate>
         <ray>
           <scan>
             <horizontal>
@@ -982,7 +981,7 @@
           <frameName>base_laser_link</frameName>
         </plugin>
       </sensor>
-  </gazebo-->
+  </gazebo>
   
   
   
