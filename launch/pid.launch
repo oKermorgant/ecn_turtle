@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    
+    <node name="pid" type="pid.py" pkg="ecn_turtle" output="screen">
+        <remap from="cmd" to="command"/>
+    </node>
+   
+     <node name="sim" type="sim.py" pkg="ecn_turtle" output="screen"/>
+    <node name="sp" type="setpoint.py" pkg="ecn_turtle" output="screen"/>
+     
+          
+        <node name="load_cfg" type="dynparam" pkg="dynamic_reconfigure"
+              args="load /pid $(find ecn_turtle)/cfg/gains.yaml"/>        
+          
+</launch>

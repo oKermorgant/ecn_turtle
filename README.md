@@ -1,5 +1,7 @@
 # ecn_turtle
 
+A package using TurtleBot / TurtleSim simulation to illustrate Gazebo, RViz and joystick control.
+
 Lauching the simulation :
 `roslaunch ecn_turtle gazebo.launch`
 

@@ -1,0 +1,12 @@
+<launch>
+ <!-- Turtlesim Node-->
+  <node pkg="turtlesim" type="turtlesim_node" name="sim" output="screen"/>
+  
+   <!-- joy node -->
+  <node respawn="true" pkg="joy" type="joy_node" name="turtle_joy">
+    <param name="dev" type="string" value="/dev/input/js1" />
+    <param name="deadzone" value="0.12" />
+  </node>
+  
+  <node pkg="ecn_turtle" type="turtle_control.py" name="control" output="screen"/>
+</launch>
